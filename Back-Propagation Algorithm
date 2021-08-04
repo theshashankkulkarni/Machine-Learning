@@ -1,0 +1,45 @@
+# implement the finite words classification system using Back-propagation algorithm
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#sigmoid function
+def nlinear(x,deriv=False):
+  if(deriv==True):
+    return x*(1-x)
+  return 1/(1+np.exp(-x))
+
+#input dataset
+X=np.array([[0,0,1],
+           [0,1,1],
+           [1,0,1],
+           [1,1,1]])
+#output dataset
+y=np.array([[0,0,1,1]]).T
+
+#Random Distribution
+np.random.seed(1)
+
+# initialize weights
+synapse=2*np.random.random((3,1))-1
+for i in range(1000):
+  #foward propagation
+  layer0=X
+  layer1=nlinear(np.dot(layer0,synapse))
+
+  #calculate error
+  layer1_error=y-layer1
+  #multiply how much error backpropagated
+  #slope of sigmoid function att the values in layer 1
+  layer1_delta=layer1_error*nlinear(layer1,True)
+  #update the weights as per the error backpropogates
+  synapse+=np.dot(layer0.T,layer1_delta)
+
+  print("Output After Training:")
+  print(layer1)
+  print("Actual output:")
+  print(y)
+  df=[y,layer1]
+  df
+  plt.plot(y,layer1)
