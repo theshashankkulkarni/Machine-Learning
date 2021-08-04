@@ -1,0 +1,83 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled2.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyOHFAFxnM7ptMtiajwmPOTU",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/theshashankkulkarni/Machine-Learning/blob/main/Linear%20Regression\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 300
+        },
+        "id": "rxGTxD47AFGp",
+        "outputId": "babcf9e3-e46a-4561-89a7-0b2f9e3f6e43"
+      },
+      "source": [
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "from sklearn.linear_model import LinearRegression\n",
+        "\n",
+        "x=np.array([1,10,20,40,50,70,80,90,120])\n",
+        "y=np.array([3,20,90,110,130,170,150,200,260])\n",
+        "linear=LinearRegression()\n",
+        "x=x.reshape(-1,1)\n",
+        "linear.fit(x,y)\n",
+        "y_pred=linear.predict(x)\n",
+        "plt.scatter(x,y)\n",
+        "plt.show()\n",
+        "print(linear.coef_)\n",
+        "\n",
+        "print(linear.intercept_)\n"
+      ],
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": [
+              "<Figure size 432x288 with 1 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": [],
+            "needs_background": "light"
+          }
+        },
+        {
+          "output_type": "stream",
+          "text": [
+            "[2.00488411]\n",
+            "18.73897136054896\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
